@@ -1,0 +1,22 @@
+'****************************************************************
+'*  Name    : UNTITLED.BAS                                      *
+'*  Author  : [select VIEW...EDITOR OPTIONS]                    *
+'*  Notice  : Copyright (c) 2013 [select VIEW...EDITOR OPTIONS] *
+'*          : All Rights Reserved                               *
+'*  Date    : 28/04/2013                                        *
+'*  Version : 1.0                                               *
+'*  Notes   :                                                   *
+'*          :                                                   *
+'****************************************************************
+TRISA=11111
+TRISB=00000000
+
+PROGRAMA:
+    
+    IF PORTA.2 THEN
+        PORTB=%00000010
+    ENDIF
+    
+END
+
+

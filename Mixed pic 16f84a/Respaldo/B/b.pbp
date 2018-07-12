@@ -1,0 +1,121 @@
+'****************************************************************
+'*  Name    : UNTITLED.BAS                                      *
+'*  Author  : [select VIEW...EDITOR OPTIONS]                    *
+'*  Notice  : Copyright (c) 2012 [select VIEW...EDITOR OPTIONS] *
+'*          : All Rights Reserved                               *
+'*  Date    : 23/10/2012                                        *
+'*  Version : 1.0                                               *
+'*  Notes   :                                                   *
+'*          :                                                   *
+'****************************************************************
+TRISA=%00001
+TRISB=0
+
+contador var byte
+ contador = 0
+
+inicio:
+
+IF CONTADOR = 0 THEN
+    PORTB=$3F
+    ENDIF
+     
+if PORTA.0 = 0 then
+    contador = contador+1
+  
+ 
+    if contador = 1 then
+        PORTB=$06
+        pause 500
+        endif
+    if contador = 2 then
+        PORTB=$5B
+        pause 500
+        endif
+    if contador = 3 then
+        PORTB=$4F
+        pause 500
+        endif
+    if contador = 4 then
+        PORTB=$66
+        pause 500
+        endif
+    if contador = 5 then
+        PORTB=$6D
+        pause 500
+        endif
+    if contador = 6 then
+        PORTB=$7D
+        pause 500
+        endif
+    if contador = 7 then
+        PORTB=$07
+        pause 500
+        ENDIF
+    if contador = 8 then
+        PORTB=$7F
+        pause 500
+        endif
+    if contador = 9 then
+        PORTB=$67
+        pause 500
+        endif
+    if contador > 9 then
+        contador = 0
+        endif
+ 
+        
+        PORTB.7 = 1
+        PAUSE 3000
+        PORTB.7 = 0
+        
+    if contador = 1 then
+            
+        PORTB=$06
+        pause 500
+        endif
+    if contador = 2 then
+        PORTB=$5B
+        pause 500
+        endif
+    if contador = 3 then
+        PORTB=$4F
+        pause 500
+        endif
+    if contador = 4 then
+        PORTB=$66
+        pause 500
+        endif
+    if contador = 5 then
+        PORTB=$6D
+        pause 500
+        endif
+    if contador = 6 then
+        PORTB=$7D
+        pause 500
+        endif
+    if contador = 7 then
+        PORTB=$07
+        pause 500
+        ENDIF
+    if contador = 8 then
+        PORTB=$7F
+        pause 500
+        endif
+    if contador = 9 then
+        PORTB=$67
+        pause 500
+        endif
+    if contador > 9 then
+        contador = 0
+        endif
+ENDIF
+
+ GOTO INICIO   
+     
+    
+ end   
+    
+    
+
+

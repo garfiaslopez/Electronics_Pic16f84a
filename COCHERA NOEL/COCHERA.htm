@@ -1,0 +1,33 @@
+<html>
+<head></head>
+<body><!--StartFragment--><pre><code><font color="#000080"><i>'****************************************************************
+'*  Name    : UNTITLED.BAS                                      *
+'*  Author  : [select VIEW...EDITOR OPTIONS]                    *
+'*  Notice  : Copyright (c) 2013 [select VIEW...EDITOR OPTIONS] *
+'*          : All Rights Reserved                               *
+'*  Date    : 12/03/2013                                        *
+'*  Version : 1.0                                               *
+'*  Notes   :                                                   *
+'*          :                                                   *
+'****************************************************************
+
+</i></font>TRISB = %11111111
+TRISA = 0
+
+COCHERA:
+
+    <b>IF </b>PORTB=%00000011 <b>THEN
+        </b>PORTA=00010
+    <b>ENDIF
+    
+    IF </b>PORTA=%00000001 <b>THEN
+        </b>PORTA=00001
+    <b>ENDIF
+
+GOTO </b>COCHERA
+
+<b>END
+
+
+</b></code></pre><!--EndFragment--></body>
+</html>

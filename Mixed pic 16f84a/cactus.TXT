@@ -1,0 +1,101 @@
+iniciar-programa
+
+define-nueva-instruccion podacactusderecha como inicio
+    mientras junto-a-zumbador hacer inicio
+
+    avanza;
+
+    si no-junto-a-zumbador entonces inicio
+        repetir 2 veces gira-izquierda;
+        avanza;
+        repetir 3 veces gira-izquierda;
+        avanza;
+        si no-junto-a-zumbador entonces inicio
+            repetir 2 veces gira-izquierda;
+            repetir 2 veces avanza;
+
+            fin;
+        fin;
+    fin;
+
+    repetir 2 veces gira-izquierda;
+    avanza;
+
+    mientras junto-a-zumbador hacer inicio
+
+    coge-zumbador;
+    si junto-a-zumbador entonces inicio
+        deja-zumbador;
+        repetir 2 veces gira-izquierda;
+        avanza;
+        sal-de-instruccion;
+     fin;
+
+    mientras no orientado-al-sur hacer gira-izquierda;
+    avanza;
+        si no-junto-a-zumbador entonces inicio
+            repetir 2 veces gira-izquierda;
+            avanza;
+            gira-izquierda;
+            avanza;
+        fin;
+    fin;
+
+
+fin;
+
+define-nueva-instruccion podacactusizquierda como inicio
+
+     mientras junto-a-zumbador hacer inicio
+
+    avanza;
+
+    si no-junto-a-zumbador entonces inicio
+        repetir 2 veces gira-izquierda;
+        avanza;
+        repetir 3 veces gira-izquierda;
+        avanza;
+        si no-junto-a-zumbador entonces inicio
+            repetir 2 veces gira-izquierda;
+            repetir 2 veces avanza;
+
+            fin;
+        fin;
+    fin;
+
+    si no-junto-a-zumbador entonces apagate;
+
+
+
+
+
+
+fin;
+    inicia-ejecucion
+
+    mientras no orientado-al-este hacer gira-izquierda;
+    mientras no junto-a-zumbador hacer avanza;
+    si no junto-a-zumbador y frente-bloqueado entonces apagate;
+    gira-izquierda;
+    coge-zumbador;
+    avanza;
+
+    mientras junto-a-zumbador hacer inicio
+        deja-zumbador;
+        repetir 3 veces gira-izquierda;
+        avanza;
+        si junto-a-zumbador entonces podacactusderecha;
+        si no-junto-a-zumbador entonces repetir 2 veces gira-izquierda;
+        repetir 2 veces avanza;
+        si junto-a-zumbador entonces podacactusizquierda;
+        si no-junto-a-zumbador entonces repetir 2 veces gira-izquierda;
+        avanza;
+        gira-izquierda;
+        coge-zumbador;
+        avanza;
+
+    fin;
+
+        apagate;
+    termina-ejecucion
+finalizar-programa

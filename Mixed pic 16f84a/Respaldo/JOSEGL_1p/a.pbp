@@ -1,0 +1,28 @@
+'****************************************************************
+'*  Name    : UNTITLED.BAS                                      *
+'*  Author  : [select VIEW...EDITOR OPTIONS]                    *
+'*  Notice  : Copyright (c) 2012 [select VIEW...EDITOR OPTIONS] *
+'*          : All Rights Reserved                               *
+'*  Date    : 26/10/2012                                        *
+'*  Version : 1.0                                               *
+'*  Notes   :                                                   *
+'*          :                                                   *
+'**************************************************************** 
+CONTADOR VAR BYTE
+LETRA VAR BYTE 
+TRISB=0
+
+INICIO:
+
+CONTADOR=0
+
+PROGRAMA:
+
+LOOKUP CONTADOR,[115,119,80,119,00,56,63,109,00,103,62,121,00,57,80,121,6,119,84,00,103,62,121,00,84,63,00,115,63,94,6,119,00,118,119,57,121,80,00,121,109,7,63,00,7,121,84,125,119,84,00], LETRA
+PORTB=LETRA
+CONTADOR = CONTADOR+1
+PAUSE 500
+IF CONTADOR=50 THEN INICIO
+GOTO PROGRAMA
+
+END

@@ -1,0 +1,86 @@
+
+	NOLIST
+; PICBASIC PRO(TM) Compiler 2.50a, (c) 1998, 2007 microEngineering Labs, Inc. All Rights Reserved.  
+
+LABEL?L macro Label
+        RST?RP
+    ifdef PM_USED
+        LALL
+Label
+        XALL
+    else
+Label
+    endif
+    endm
+
+LAND?BBW macro Bin1, Bin2, Wout
+        MOVE?BB Bin1, FSR
+        MOVE?BA Bin2
+        L?CALL  LAND
+        MOVE?AB Wout
+        movwf   Wout + 1
+    endm
+LAND_USED = 1
+
+CMPF?WL macro Win, Label
+        CLRWDT?
+        MOVE?BA Win
+        iorwf   Win + 1, W
+        BIT?GOTO 1, STATUS, Z, Label
+    endm
+
+CMPEQ?TCB macro Regin, Bitin, Cin, Bout
+    if (((Cin) == 0) | ((Cin) == 1))
+	clrw
+	CHK?RP	Regin
+      if ((Cin) == 0)
+	btfss Regin, Bitin
+      else
+	btfsc Regin, Bitin
+      endif
+        movlw   -1
+        MOVE?AB Bout
+    else
+        CHK?RP  Bout
+        clrf    Bout
+    endif
+    endm
+
+CMPNE?TCL macro Regin, Bitin, Cin, Label
+    if ((Cin) == 0)
+        CLRWDT?
+        BIT?GOTO 1, Regin, Bitin, Label
+    else
+      if ((Cin) == 1)
+        CLRWDT?
+        BIT?GOTO 0, Regin, Bitin, Label
+      else
+        L?GOTO  Label
+      endif
+    endif
+    endm
+
+CMPNE?TTL macro Regin1, Bitin1, Regin2, Bitin2, Label
+        CLRWDT?
+        clrw
+        CHK?RP  Regin1
+        btfsc   Regin1, Bitin1
+        addlw   1
+        CHK?RP  Regin2
+        btfsc   Regin2, Bitin2
+        sublw   1
+        BIT?GOTO 0, STATUS, Z, Label
+    endm
+
+END? macro
+    local loop
+loop    sleep
+        L?GOTO  loop
+    endm
+
+GOTO?L macro Label
+        L?GOTO  Label
+    endm
+
+
+	LIST

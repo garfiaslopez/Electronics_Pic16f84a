@@ -1,0 +1,86 @@
+'****************************************************************
+'*  Name    : UNTITLED.BAS                                      *
+'*  Author  : [select VIEW...EDITOR OPTIONS]                    *
+'*  Notice  : Copyright (c) 2012 [select VIEW...EDITOR OPTIONS] *
+'*          : All Rights Reserved                               *
+'*  Date    : 21/09/2012                                        *
+'*  Version : 1.0                                               *
+'*  Notes   :                                                   *
+'*          :                                                   *
+'****************************************************************
+TRISA=11111
+TRISB=00000000
+INICIO:
+
+    PORTA=%00000
+    PORTB=%00000000
+        
+    IF PORTA=%00000 THEN
+        PORTB=%00000110
+        PAUSE 500
+    ENDIF
+    IF PORTA=%00001 THEN
+        PORTB=%00000010
+        PAUSE 500
+    ENDIF
+    IF PORTA=%00010 THEN
+        PORTB=%00000010
+        PAUSE 500
+    ENDIF
+    IF PORTA=%00011 THEN
+        PORTB=%00000010
+        PAUSE 500
+    ENDIF
+    IF PORTA=%00100 THEN
+        PORTB=%00000100
+        PAUSE 500
+    ENDIF
+    IF PORTA=%00101 THEN
+        PORTB=%00000110
+        PAUSE 500
+    ENDIF
+    IF PORTA=%00110 THEN
+        PORTB=%00000100
+        PAUSE 500
+    ENDIF
+    IF PORTA=%00111 THEN
+        PORTB=%00000100
+        PAUSE 500
+    ENDIF
+    IF PORTA=%01000 THEN
+        PORTB=%00000100
+        PAUSE 500
+    ENDIF
+    IF PORTA=%01001 THEN
+        PORTB=%00000100
+        PAUSE 500
+    ENDIF
+    IF PORTA=%01010 THEN
+        PORTB=%00000110
+        PAUSE 500
+    ENDIF
+    IF PORTA=%01011 THEN
+        PORTB=%00000010
+        PAUSE 500
+    ENDIF
+    IF PORTA=%01100 THEN
+        PORTB=%00000100
+        PAUSE 500
+    ENDIF
+    IF PORTA=%01101 THEN
+        PORTB=%00000100
+        PAUSE 500
+    ENDIF
+    IF PORTA=%01110 THEN
+        PORTB=%00000100
+        PAUSE 500
+    ENDIF
+    IF PORTA=%01111 THEN
+        PORTB=%00000110
+        PAUSE 500
+    ENDIF
+    
+goto inicio
+end
+
+    

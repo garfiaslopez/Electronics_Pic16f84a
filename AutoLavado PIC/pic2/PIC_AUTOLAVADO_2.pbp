@@ -1,0 +1,49 @@
+'****************************************************************
+'*  Name    : UNTITLED.BAS                                      *
+'*  Author  : [select VIEW...EDITOR OPTIONS]                    *
+'*  Notice  : Copyright (c) 2014 [select VIEW...EDITOR OPTIONS] *
+'*          : All Rights Reserved                               *
+'*  Date    : 14/04/2014                                        *
+'*  Version : 1.0                                               *
+'*  Notes   : PORTB: 0 SENSOR  1 LED GREEN  2 BUZZER 3 LED RED  *
+'*          :                                                   *
+'****************************************************************
+
+TRISA =%11111
+TRISB =%00000000
+BANDERA VAR BYTE
+
+ 
+INICIO:
+
+    PORTB.0=0
+    PORTB.1=0
+    PORTB.2=0
+    PORTB.4=0
+    PORTB.5=0
+    PORTB.6=0
+    PORTB.7=0    
+    PORTB.3=1
+    
+    IF PORTA.0=1 then      '* MANDA EL PULSO AL TECLADO  Y AL LED*
+    
+         IF BANDERA == 0 THEN
+         
+            PORTB.0=1
+            PORTB.1=1
+            PORTB.3=0
+            PAUSE 1000           '* MANDA EL PULSO AL BUZZER*
+            PORTB.0=0
+            PORTB.2=1
+            PAUSE 2000
+            PORTB.2=0
+  
+         ENDIF
+         BANDERA=1
+    ENDIF
+    
+    IF PORTA.0=0 THEN
+        BANDERA = 0
+    ENDIF
+    GOTO INICIO
+end

@@ -1,0 +1,57 @@
+'****************************************************************
+'*  Name    : UNTITLED.BAS                                      *
+'*  Author  : [select VIEW...EDITOR OPTIONS]                    *
+'*  Notice  : Copyright (c) 2012 [select VIEW...EDITOR OPTIONS] *
+'*          : All Rights Reserved                               *
+'*  Date    : 08/11/2012                                        *
+'*  Version : 1.0                                               *
+'*  Notes   :                                                   *
+'*          :                                                   *
+'****************************************************************
+
+TRISB=%11111111
+TRISA=%00000
+
+ELEVADOR:
+
+IF PORTB.0 = 1 THEN                        '*Entradas: todo conectado a tierra.*
+    WHILE PORTB.3 = 0                         '* PORTB.0  switch ir arriba     *
+        PORTA.0 = 0                           '* PORTB.3   bandera arriba    *
+        PORTA.1 = 1                           '* PORTB.1  switch ir enmedio      *
+    WEND                                      '* PORTB.5  bandera abajo       *
+    PORTA.2 = 1                               '* PORTB.4  bandera enmedio       *
+ENDIF                                         '* PORTB.2  switch ir abajo         *
+                                              
+IF PORTB.1 = 1 THEN 
+    IF PORTB.5 = 1 THEN                     '*Salidas:              *
+        WHILE PORTB.4 = 0                     '* PORTA.0     MOTOR        *
+            PORTA.0 = 0                       '* PORTA.1     MOTOR         *
+            PORTA.1 = 1                       '* PORTA.2       LED        *
+        WEND                                  '* 01 Eleva    10 desciende*
+        PORTA.2 = 1
+    ENDIF
+    
+    IF PORTB.3 = 1 THEN
+        WHILE PORTB.4 = 0
+            PORTA.0 = 1
+            PORTA.1 = 0
+        WEND
+        PORTA.2 = 1
+    ENDIF
+ENDIF
+
+IF PORTB.2 = 1 THEN
+    WHILE PORTB.5 = 0 
+        PORTA.0 = 1
+        PORTA.1 = 0
+    WEND
+    PORTA.2 = 1 
+ENDIF
+
+GOTO ELEVADOR
+
+END
+
+
+
+

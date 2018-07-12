@@ -1,0 +1,36 @@
+'****************************************************************
+'*  Name    : UNTITLED.BAS                                      *
+'*  Author  : [select VIEW...EDITOR OPTIONS]                    *
+'*  Notice  : Copyright (c) 2013 [select VIEW...EDITOR OPTIONS] *
+'*          : All Rights Reserved                               *
+'*  Date    : 13/03/2013                                        *
+'*  Version : 1.0                                               *
+'*  Notes   :                                                   *
+'*          :                                                   *
+'****************************************************************
+
+TRISB =%00000000
+TRISA =%11111
+
+CONTADOR:
+
+    IF PORTA=%0000 THEN
+        PORTB=%01111001
+    ENDIF
+    
+    IF PORTA=%0001 THEN
+        PORTB=%00000110
+    ENDIF
+    
+    IF PORTA=%0010 THEN
+        PORTB=%01011011
+    ENDIF
+    
+    IF PORTA=%0011 THEN
+        PORTB=%01001111
+    ENDIF
+    
+GOTO CONTADOR
+
+END
+

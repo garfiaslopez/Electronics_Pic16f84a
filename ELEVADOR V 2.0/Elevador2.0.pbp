@@ -1,0 +1,63 @@
+'****************************************************************
+'*  Name    : UNTITLED.BAS                                      *
+'*  Author  : [select VIEW...EDITOR OPTIONS]                    *
+'*  Notice  : Copyright (c) 2013 [select VIEW...EDITOR OPTIONS] *
+'*          : All Rights Reserved                               *
+'*  Date    : 06/03/2013                                        *
+'*  Version : 1.0                                               *
+'*  Notes   :                                                   *
+'*          :                                                   *
+'****************************************************************
+TRISB=%11111111
+TRISA=%00000
+
+ELEVATE:
+
+    IF PORTB=%00000000 THEN
+        PORTA=%00000
+    ENDIF
+
+    IF PORTB=%00001100 THEN           
+        WHILE PORTB.5=0
+            PORTA=%00001
+        WEND
+        PORTA=%00100
+    ENDif
+
+    IF PORTB=%00010100 THEN
+        WHILE PORTB.5=0
+            PORTA=%00001
+        WEND
+        PORTA=%00100             
+    ENDif
+    
+    IF PORTB=%00001010 THEN             
+        WHILE PORTB.4=0
+            PORTA=%00001
+        WEND
+        PORTA=%01000
+    ENDif
+    
+    IF PORTB=%00100010 THEN          
+        WHILE PORTB.4=0
+            PORTA=%00010
+        WEND
+        PORTA=%01000
+    ENDif
+    
+    IF PORTB=%00100001 THEN             
+        WHILE PORTB.3=0
+            PORTA=%00010
+        WEND
+        PORTA=%01100
+    ENDif
+    
+    IF PORTB=%00010001 THEN          
+        WHILE PORTB.3=0
+            PORTA=%00010
+        WEND
+        PORTA=%01100
+    ENDif
+
+GOTO ELEVATE:
+END

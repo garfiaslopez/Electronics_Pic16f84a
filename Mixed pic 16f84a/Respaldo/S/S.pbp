@@ -1,0 +1,20 @@
+'****************************************************************
+'*  Name    : UNTITLED.BAS                                      *
+'*  Author  : [select VIEW...EDITOR OPTIONS]                    *
+'*  Notice  : Copyright (c) 2012 [select VIEW...EDITOR OPTIONS] *
+'*          : All Rights Reserved                               *
+'*  Date    : 12/11/2012                                        *
+'*  Version : 1.0                                               *
+'*  Notes   :                                                   *
+'*          :                                                   *
+'****************************************************************
+TRISB = 0
+SONIDO:
+    SOUND PORTB.0,[127,100]
+    SOUND PORTB.0,[80,100]
+    SOUND PORTB.0,[30,100]
+    
+    GOTO SONIDO
+END
+
+

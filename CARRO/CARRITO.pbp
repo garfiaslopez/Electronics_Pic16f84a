@@ -1,0 +1,29 @@
+'****************************************************************
+'*  Name    : UNTITLED.BAS                                      *
+'*  Author  : [select VIEW...EDITOR OPTIONS]                    *
+'*  Notice  : Copyright (c) 2013 [select VIEW...EDITOR OPTIONS] *
+'*          : All Rights Reserved                               *
+'*  Date    : 25/04/2013                                        *
+'*  Version : 1.0                                               *
+'*  Notes   :                                                   *
+'*          :                                                   *
+'****************************************************************
+TRISB=00000000
+
+INICIO:
+
+    PORTB=%00000001
+    PAUSE 1000
+    PORTB=%00000010
+    PAUSE 1000
+    PORTB=%00000100
+    PAUSE 1000
+    PORTB=%00000000
+    
+    goto inicio:
+    
+END
+
+
+
+

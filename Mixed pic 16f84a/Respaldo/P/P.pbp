@@ -1,0 +1,81 @@
+'****************************************************************
+'*  Name    : UNTITLED.BAS                                      *
+'*  Author  : [select VIEW...EDITOR OPTIONS]                    *
+'*  Notice  : Copyright (c) 2012 [select VIEW...EDITOR OPTIONS] *
+'*          : All Rights Reserved                               *
+'*  Date    : 14/09/2012                                        *
+'*  Version : 1.0                                               *
+'*  Notes   :                                                   *
+'*          :                                                   *
+'****************************************************************
+TRISA=%11111
+TRISB=%00000000
+
+INICIO:
+
+IF PORTA = %01111 THEN
+    PORTB = %00111001
+    PAUSE 400
+    PORTB = %01110111
+    PAUSE 400
+    PORTB = %01111100
+    PAUSE 400
+    PORTB = %00111000
+    PAUSE 400
+    PORTB = %01111001
+    PAUSE 400
+    PORTB = %00000000
+    PAUSE 400
+    PORTB = %00111001
+    PAUSE 400
+    PORTB = %00111111
+    PAUSE 400
+    PORTB = %01010000
+    PAUSE 400
+    PORTB = %00000000
+    PAUSE 200
+    PORTB = %01010000
+    PAUSE 400
+    PORTB = %01111001
+    PAUSE 400
+    PORTB = %00111001
+    PAUSE 400
+    PORTB = %00000111
+    PAUSE 400
+    PORTB = %00111111
+    PAUSE 400
+    PORTB = %00000000
+    PAUSE 400
+ENDIF
+
+if PORTA.0 = 0 THEN
+    PORTB = %00000110
+    PAUSE 400
+    PORTB = 0
+    PAUSE 200
+ENDIF
+
+IF PORTA.1 = 0 THEN
+    PORTB = %01011011
+    PAUSE 400
+    PORTB = 0
+    PAUSE 200
+ENDIF
+
+IF PORTA.2 = 0 THEN
+    PORTB = %01001111
+    PAUSE 400
+    PORTB = 0
+    PAUSE 200
+ENDIF
+
+IF PORTA.3 = 0 THEN 
+    PORTB = %01100110
+    PAUSE 400
+    PORTB = 0
+    PAUSE 200
+ENDIF
+
+GOTO INICIO
+END
+

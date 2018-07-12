@@ -1,0 +1,79 @@
+
+	NOLIST
+; PICBASIC PRO(TM) Compiler 2.50a, (c) 1998, 2007 microEngineering Labs, Inc. All Rights Reserved.  
+
+LABEL?L macro Label
+        RST?RP
+    ifdef PM_USED
+        LALL
+Label
+        XALL
+    else
+Label
+    endif
+    endm
+
+DTMFOFFTIME?C macro Cin
+        MOVE?CW Cin, R5
+    endm
+
+DTMFONTIME?C macro Cin
+        MOVE?CB low (Cin), RR2
+        MOVE?CB (Cin) >> 8, RM2
+    endm
+
+DTMFOUT?C macro Cin
+        movlw   Cin
+        L?CALL  DTMFOUT
+    endm
+DTMFOUT_USED = 1
+
+DTMFPIN?T macro Regin, Bitin
+        BIT?R1  Regin, Bitin
+    endm
+
+END? macro
+    local loop
+loop    sleep
+        L?GOTO  loop
+    endm
+
+GOTO?L macro Label
+        L?GOTO  Label
+    endm
+
+HIGH?T macro Regin, Bitin
+        MOVE?CT 1, Regin, Bitin
+        MOVE?CT 0, ((Regin) + 80h), Bitin
+    endm
+
+LOW?T macro Regin, Bitin
+        MOVE?CT 0, Regin, Bitin
+        MOVE?CT 0, ((Regin) + 80h), Bitin
+    endm
+
+PAUSE?C macro Cin
+    if (((Cin) >> 8) == 0)
+        MOVE?CA Cin
+        L?CALL  PAUSE
+    else
+        MOVE?CB (Cin) >> 8, R1 + 1
+        MOVE?CA low (Cin)
+        L?CALL  PAUSEL
+    endif
+    endm
+PAUSE_USED = 1
+
+SOUND?CC macro Cin1, Cin2
+        MOVE?CB Cin1, R1
+        movlw   Cin2
+        L?CALL  SOUND
+    endm
+SOUND_USED = 1
+
+SOUNDPIN?T macro Regin, Bitin
+        BIT?R1  Regin, Bitin
+    endm
+
+
+	LIST

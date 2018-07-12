@@ -1,0 +1,36 @@
+'****************************************************************
+'*  Name    : UNTITLED.BAS                                      *
+'*  Author  : [select VIEW...EDITOR OPTIONS]                    *
+'*  Notice  : Copyright (c) 2014 [select VIEW...EDITOR OPTIONS] *
+'*          : All Rights Reserved                               *
+'*  Date    : 04/04/2014                                        *
+'*  Version : 1.0                                               *
+'*  Notes   :                                                   *
+'*          :                                                   *
+'****************************************************************
+DEFINE LCD_DREG PORTA
+DEFINE LCD_DBIT 0
+DEFINE LCD_RSREG PORTB
+DEFINE LCD_RSBIT 1
+DEFINE LCD_EREG PORTB
+DEFINE LCD_EBIT 2
+H VAR BYTE
+M VAR BYTE
+S VAR BYTE
+
+TRISD=0
+
+LCDOUT $FE,1," 1CM8 FISICA CLASICA"
+LCDOUT $FE,$C4,DEC2 H
+INICIO:
+
+if PORTD.0 = 1 then 
+     H = H+1
+     LCDOUT $FE,$C4,DEC2 H
+     pause 100
+endif
+
+
+
+GOTO INICIO
+END

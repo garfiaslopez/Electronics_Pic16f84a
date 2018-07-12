@@ -1,0 +1,1936 @@
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 
+                      00002 ; PICBASIC PRO(TM) Compiler 2.50a, (c) 1998, 2007 microEngineering Labs, Inc. All Rights Reserved.  
+  00000001            00003 _USED                   EQU     1
+                      00004 
+                      00005         INCLUDE "C:\PBP\16F628.INC"
+                      00001 ;****************************************************************
+                      00002 ;*  16F628.INC                                                  *
+                      00003 ;*                                                              *
+                      00004 ;*  By        : Leonard Zerman, Jeff Schmoyer                   *
+                      00005 ;*  Notice    : Copyright (c) 2002 microEngineering Labs, Inc.  *
+                      00006 ;*              All Rights Reserved                             *
+                      00007 ;*  Date      : 09/27/02                                        *
+                      00008 ;*  Version   : 2.43                                            *
+                      00009 ;*  Notes     :                                                 *
+                      00010 ;****************************************************************
+                      00019         LIST
+                      00020         LIST p = 16F628, r = dec, w = -302
+                      00021         INCLUDE "P16F628.INC"   ; MPASM  Header
+                      00001         LIST
+                      00002 ; P16F628.INC  Standard Header File, Version 1.01    Microchip Technology, Inc.
+                      00261         LIST
+2007   3F65           00022         __config _XT_OSC & _WDT_ON & _PWRTE_ON & _MCLRE_ON & _LVP_OFF & _CP_OFF
+                      00025         LIST
+                      00006 
+  00000020            00007 RAM_START                       EQU     00020h
+  0000014F            00008 RAM_END                         EQU     0014Fh
+  00000003            00009 RAM_BANKS                       EQU     00003h
+  00000020            00010 BANK0_START                     EQU     00020h
+  0000007F            00011 BANK0_END                       EQU     0007Fh
+  000000A0            00012 BANK1_START                     EQU     000A0h
+  000000EF            00013 BANK1_END                       EQU     000EFh
+  00000120            00014 BANK2_START                     EQU     00120h
+  0000014F            00015 BANK2_END                       EQU     0014Fh
+  00002100            00016 EEPROM_START                    EQU     02100h
+  0000217F            00017 EEPROM_END                      EQU     0217Fh
+                      00018 
+                      00019 ; C:\PBP\PBPPIC14.RAM           00012   R0      VAR     WORD BANK0 SYSTEM       ' System Register
+  00000020            00020 R0                              EQU     RAM_START + 000h
+                      00021 ; C:\PBP\PBPPIC14.RAM           00013   R1      VAR     WORD BANK0 SYSTEM       ' System Register
+  00000022            00022 R1                              EQU     RAM_START + 002h
+                      00023 ; C:\PBP\PBPPIC14.RAM           00014   R2      VAR     WORD BANK0 SYSTEM       ' System Register
+  00000024            00024 R2                              EQU     RAM_START + 004h
+                      00025 ; C:\PBP\PBPPIC14.RAM           00015   R3      VAR     WORD BANK0 SYSTEM       ' System Register
+  00000026            00026 R3                              EQU     RAM_START + 006h
+                      00027 ; C:\PBP\PBPPIC14.RAM           00016   R4      VAR     WORD BANK0 SYSTEM       ' System Register
+  00000028            00028 R4                              EQU     RAM_START + 008h
+                      00029 ; C:\PBP\PBPPIC14.RAM           00017   R5      VAR     WORD BANK0 SYSTEM       ' System Register
+  0000002A            00030 R5                              EQU     RAM_START + 00Ah
+                      00031 ; C:\PBP\PBPPIC14.RAM           00018   R6      VAR     WORD BANK0 SYSTEM       ' System Register
+  0000002C            00032 R6                              EQU     RAM_START + 00Ch
+                      00033 ; C:\PBP\PBPPIC14.RAM           00019   R7      VAR     WORD BANK0 SYSTEM       ' System Register
+  0000002E            00034 R7                              EQU     RAM_START + 00Eh
+                      00035 ; C:\PBP\PBPPIC14.RAM           00020   R8      VAR     WORD BANK0 SYSTEM       ' System Register
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+  00000030            00036 R8                              EQU     RAM_START + 010h
+                      00037 ; C:\PBP\PBPPIC14.RAM           00026   FLAGS   VAR     BYTE BANK0 SYSTEM       ' Static flags
+  00000032            00038 FLAGS                           EQU     RAM_START + 012h
+                      00039 ; C:\PBP\PBPPIC14.RAM           00025   GOP     VAR     BYTE BANK0 SYSTEM       ' Gen Op Parameter
+  00000033            00040 GOP                             EQU     RAM_START + 013h
+                      00041 ; C:\PBP\PBPPIC14.RAM           00022   RM1     VAR     BYTE BANK0 SYSTEM       ' Pin 1 Mask
+  00000034            00042 RM1                             EQU     RAM_START + 014h
+                      00043 ; C:\PBP\PBPPIC14.RAM           00024   RM2     VAR     BYTE BANK0 SYSTEM       ' Pin 2 Mask
+  00000035            00044 RM2                             EQU     RAM_START + 015h
+                      00045 ; C:\PBP\PBPPIC14.RAM           00021   RR1     VAR     BYTE BANK0 SYSTEM       ' Pin 1 Register
+  00000036            00046 RR1                             EQU     RAM_START + 016h
+                      00047 ; C:\PBP\PBPPIC14.RAM           00023   RR2     VAR     BYTE BANK0 SYSTEM       ' Pin 2 Register
+  00000037            00048 RR2                             EQU     RAM_START + 017h
+                      00049 ; C:\USERS\GARFIASLOPEZWINDOWS\DESKTOP\JOSEGL_1P\EL ARA\UNTITLED.PBP    00011   CONTADOR VAR BYTE
+  00000038            00050 _CONTADOR                       EQU     RAM_START + 018h
+                      00051 ; C:\USERS\GARFIASLOPEZWINDOWS\DESKTOP\JOSEGL_1P\EL ARA\UNTITLED.PBP    00012   LETRA VAR BYTE 
+  00000039            00052 _LETRA                          EQU     RAM_START + 019h
+                      00053 ; C:\PBP\16F628.BAS             00020   PORTL   VAR     PORTB
+  00000006            00054 _PORTL                          EQU      PORTB
+                      00055 ; C:\PBP\16F628.BAS             00021   PORTH   VAR     PORTA
+  00000005            00056 _PORTH                          EQU      PORTA
+                      00057 ; C:\PBP\16F628.BAS             00022   TRISL   VAR     TRISB
+  00000086            00058 _TRISL                          EQU      TRISB
+                      00059 ; C:\PBP\16F628.BAS             00023   TRISH   VAR     TRISA
+  00000085            00060 _TRISH                          EQU      TRISA
+                      00061         INCLUDE "UNTITLED.MAC"
+                      00001 
+                      00092         LIST
+                      00062         INCLUDE "C:\PBP\PBPPIC14.LIB"
+                      00001 ;******************************************************************
+                      00002 ;*  PBPPIC14.LIB                                                  *
+                      00003 ;*                                                                *
+                      00004 ;*  By        : Leonard Zerman, Jeff Schmoyer                     *
+                      00005 ;*  Notice    : Copyright (c) 2007 microEngineering Labs, Inc.    *
+                      00006 ;*              All Rights Reserved                               *
+                      00007 ;*  Date      : 08/01/07                                          *
+                      00008 ;*  Version   : 2.50                                              *
+                      00009 ;*  Notes     :                                                   *
+                      00010 ;******************************************************************
+                      00046   LIST
+                      00047 ; Oscillator is 4MHz
+                      01112   LIST
+0000                  01113     ORG 0                       ; Reset vector at 0
+                      01127   LIST
+0000   2828           01128         goto    INIT            ; Finish initialization
+                      06158   LIST
+0001   01A3           06159 PAUSE   clrf    R1 + 1
+0002   00A2           06160 PAUSEL  movwf   R1
+0003   30FF           06161 pauseloop movlw -1              ; 1 (9)
+0004   07A2           06162         addwf   R1, F           ; 1
+0005   1C03           06163         btfss   STATUS, C       ; 1 / 2
+0006   07A3           06164         addwf   R1 + 1, F       ; 1 / 0
+0007   1C03           06165         btfss   STATUS, C       ; 2
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0008   2823           06166         goto    DONE
+0009   3003           06167         movlw   (PAUSE_DELAY) >> 8      ; 1
+000A   00A1           06168         movwf   R0 + 1          ; 1
+000B   30DF           06169         movlw   low (PAUSE_DELAY)       ; 1
+000C   200F           06170         call    PAUSEUSL        ; -2 (PAUSEUSL gives you 2 less than you ask for)
+000D   2803           06171         goto    pauseloop       ; 2
+                      06215   LIST
+000E   01A1           06216 PAUSEUS clrf    R0 + 1          ; 1
+000F   3EE8           06217 PAUSEUSL addlw  -24             ; 1 Subtract overhead
+0010   00A0           06218         movwf   R0              ; 1
+0011   09A1           06219         comf    R0 + 1, F       ; 1
+0012   30FC           06220         movlw   -4              ; 1
+0013   1C03           06221         btfss   STATUS, C       ; 1 / 2
+0014   2818           06222         goto    pauseush        ; 2 / 0
+0015   07A0           06223 pauseusloop addwf R0, F         ; 1
+0016   1803           06224         btfsc   STATUS, C       ; 1 / 2
+0017   2815           06225         goto    pauseusloop     ; 2 / 0
+0018   07A0           06226 pauseush addwf  R0, F           ; 1 Do an extra countdown
+                      06227         CLRWDT?NOP              ; 1 Keep Watchdog clear
+                          M     ifndef NO_CLRWDT
+0019   0064               M         clrwdt
+                          M     else
+                          M         nop
+                          M     endif
+001A   0FA1           06228         incfsz  R0 + 1, F       ; 1 / 2
+001B   2815           06229         goto    pauseusloop     ; 2 / 0
+001C   1820           06230         btfsc   R0, 0           ; 1 / 2
+001D   281E           06231         goto    $ + 1           ; 2 / 0 Burn an extra cycle
+001E   1CA0           06232         btfss   R0, 1           ; 1 / 2
+001F   2822           06233         goto    pauseusdone     ; 2 / 0
+0020   0000           06234         nop                     ; 1
+0021   2822           06235         goto    $ + 1           ; 2 Burn an extra 2 cycles
+0022   0008           06236 pauseusdone return              ; 2 + 3 (call + setup)
+                      07422   LIST
+0023   1383           07423 DONE    bcf     STATUS, IRP     ; 1 Set FSR to bank 0/1
+0024   1303           07424         bcf     STATUS, RP1     ; 1 Show direct bank 0
+0025   1283           07425         bcf     STATUS, RP0     ; 1
+                      07426         CLRWDT?NOP              ; 1 Hit Watchdog timer
+                          M     ifndef NO_CLRWDT
+0026   0064               M         clrwdt
+                          M     else
+                          M         nop
+                          M     endif
+0027   0008           07427 DONERET return                  ; 2 Done
+                      07451   LIST
+0028                  07452 INIT
+                      07490   LIST
+0028                  07491 main
+                      00063 
+                      00064 
+                      00065 ; C:\PBP\16F628.BAS             00012   BANK0   $0020, $007F
+                      00066 ; C:\PBP\16F628.BAS             00013   BANK1   $00A0, $00EF
+                      00067 ; C:\PBP\16F628.BAS             00014   BANK2   $0120, $014F
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00068 ; C:\PBP\16F628.BAS             00015   EEPROM  $2100, $217F
+                      00069 ; C:\PBP\16F628.BAS             00016   LIBRARY "PBPPIC14"
+                      00070 
+                      00071 ; C:\PBP\16F628.BAS             00018           include "PIC14EXT.BAS"
+                      00072 
+                      00073 ; C:\PBP\16F628.BAS             00025           include "PBPPIC14.RAM"
+                      00074 
+                      00075 ; C:\USERS\GARFIASLOPEZWINDOWS\DESKTOP\JOSEGL_1P\EL ARA\UNTITLED.PBP    00013   TRISB=0
+                      00076         MOVE?CB 000h, TRISB
+                          M         CHK?RP  TRISB
+                          M     if (((TRISB) & 180h) == 0)
+                          M       if (PREV_BANK == 1)
+                          M         bcf     STATUS, RP0
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP0
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M PREV_BANK = 0
+                          M     endif
+                          M 
+                          M     if (((TRISB) & 180h) == 80h)
+                          M       if (PREV_BANK == 0)
+0028   1683               M         bsf     STATUS, RP0
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bsf     STATUS, RP0
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP1
+                          M       endif
+  00000001                M PREV_BANK = 1
+                          M     endif
+                          M 
+                          M     if (((TRISB) & 180h) == 100h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 1)
+                          M         bcf     STATUS, RP0
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP0
+                          M       endif
+                          M PREV_BANK = 2
+                          M     endif
+                          M 
+                          M     if (((TRISB) & 180h) == 180h)
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP0
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 1)
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bsf     STATUS, RP0
+                          M       endif
+                          M PREV_BANK = 3
+                          M     endif
+                          M     if (low (000h) == 0)
+0029   0186               M         clrf    TRISB
+                          M     else
+                          M         movlw   low (000h)
+                          M         movwf   TRISB
+                          M     endif
+                      00077 
+                      00078 ; C:\USERS\GARFIASLOPEZWINDOWS\DESKTOP\JOSEGL_1P\EL ARA\UNTITLED.PBP    00015   INICIO:
+                      00079 
+                      00080         LABEL?L _INICIO 
+                          M         RST?RP
+                          M     if ((PREV_BANK & 1) != 0)
+002A   1283               M         bcf     STATUS, RP0
+                          M     endif
+                          M     if ((PREV_BANK & 2) != 0)
+                          M         bcf     STATUS, RP1
+                          M     endif
+  00000000                M PREV_BANK = 0
+                          M     ifdef PM_USED
+                          M         LALL
+                          M _INICIO
+                          M         XALL
+                          M     else
+002B                      M _INICIO
+                          M     endif
+                      00081 
+                      00082 ; C:\USERS\GARFIASLOPEZWINDOWS\DESKTOP\JOSEGL_1P\EL ARA\UNTITLED.PBP    00017   CONTADOR=0
+                      00083         MOVE?CB 000h, _CONTADOR
+                          M         CHK?RP  _CONTADOR
+                          M     if (((_CONTADOR) & 180h) == 0)
+                          M       if (PREV_BANK == 1)
+                          M         bcf     STATUS, RP0
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP0
+                          M         bcf     STATUS, RP1
+                          M       endif
+  00000000                M PREV_BANK = 0
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M     endif
+                          M 
+                          M     if (((_CONTADOR) & 180h) == 80h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP0
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bsf     STATUS, RP0
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M PREV_BANK = 1
+                          M     endif
+                          M 
+                          M     if (((_CONTADOR) & 180h) == 100h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 1)
+                          M         bcf     STATUS, RP0
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP0
+                          M       endif
+                          M PREV_BANK = 2
+                          M     endif
+                          M 
+                          M     if (((_CONTADOR) & 180h) == 180h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP0
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 1)
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bsf     STATUS, RP0
+                          M       endif
+                          M PREV_BANK = 3
+                          M     endif
+                          M     if (low (000h) == 0)
+002B   01B8               M         clrf    _CONTADOR
+                          M     else
+                          M         movlw   low (000h)
+                          M         movwf   _CONTADOR
+                          M     endif
+                      00084 
+                      00085 ; C:\USERS\GARFIASLOPEZWINDOWS\DESKTOP\JOSEGL_1P\EL ARA\UNTITLED.PBP    00019   PROGRAMA:
+                      00086 
+                      00087         LABEL?L _PROGRAMA       
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M         RST?RP
+                          M     if ((PREV_BANK & 1) != 0)
+                          M         bcf     STATUS, RP0
+                          M     endif
+                          M     if ((PREV_BANK & 2) != 0)
+                          M         bcf     STATUS, RP1
+                          M     endif
+  00000000                M PREV_BANK = 0
+                          M     ifdef PM_USED
+                          M         LALL
+                          M _PROGRAMA
+                          M         XALL
+                          M     else
+002C                      M _PROGRAMA
+                          M     endif
+                      00088 
+                      00089 ; C:\USERS\GARFIASLOPEZWINDOWS\DESKTOP\JOSEGL_1P\EL ARA\UNTITLED.PBP    00021   LOOKUP CONTADOR,[115,119
+                            ,50,119,00,56,63,109,00,103,62,121,00,57,50,121,6,119,84,00,103,62,121,00,84,63,00,115,63,94,6,1
+                      00090         LOOKUP?BCLB     _CONTADOR, 032h, L00001, _LETRA
+  0000                    M     local dojump, valtbl
+                          M         MOVE?BA _CONTADOR
+                          M         CHK?RP  _CONTADOR
+                          M     if (((_CONTADOR) & 180h) == 0)
+                          M       if (PREV_BANK == 1)
+                          M         bcf     STATUS, RP0
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP0
+                          M         bcf     STATUS, RP1
+                          M       endif
+  00000000                M PREV_BANK = 0
+                          M     endif
+                          M 
+                          M     if (((_CONTADOR) & 180h) == 80h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP0
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bsf     STATUS, RP0
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M PREV_BANK = 1
+                          M     endif
+                          M 
+                          M     if (((_CONTADOR) & 180h) == 100h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP1
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M       endif
+                          M       if (PREV_BANK == 1)
+                          M         bcf     STATUS, RP0
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP0
+                          M       endif
+                          M PREV_BANK = 2
+                          M     endif
+                          M 
+                          M     if (((_CONTADOR) & 180h) == 180h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP0
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 1)
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bsf     STATUS, RP0
+                          M       endif
+                          M PREV_BANK = 3
+                          M     endif
+002C   0838               M         movf    _CONTADOR, W
+002D   3C31               M         sublw   (032h) - 1
+                          M         BIT?GOTO 0, STATUS, C, L00001
+                          M     if ($ == (L00001))
+                          M         CLRWDT?
+                          M     endif
+                          M 
+                          M     if (CODE_SIZE >= 4)
+                          M       if (((L00001) & 800h) == 0)
+                          M         bcf     PCLATH, 3
+                          M       else
+                          M         bsf     PCLATH, 3
+                          M       endif
+                          M     endif
+                          M     if (CODE_SIZE == 8)
+                          M       if (((L00001) & 1000h) == 0)
+                          M         bcf     PCLATH, 4
+                          M       else
+                          M         bsf     PCLATH, 4
+                          M       endif
+                          M     endif
+                          M 
+                          M     if (((STATUS) & 0ff80h) != 0)
+                          M         CHK?RP  STATUS
+                          M         bcf     STATUS, DC
+                          M       if ((0)      == 0)
+                          M         btfss   STATUS, C
+                          M       else
+                          M         btfsc   STATUS, C
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M       endif
+                          M         bsf     STATUS, DC
+                          M         RST?RP
+                          M         btfsc   STATUS, DC
+                          M     else
+                          M         RST?RP
+                          M     if ((PREV_BANK & 1) != 0)
+                          M         bcf     STATUS, RP0
+                          M     endif
+                          M     if ((PREV_BANK & 2) != 0)
+                          M         bcf     STATUS, RP1
+                          M     endif
+  00000000                M PREV_BANK = 0
+                          M       if ((0)      == 0)
+002E   1C03               M         btfss   STATUS, C
+                          M       else
+                          M         btfsc   STATUS, C
+                          M       endif
+                          M     endif
+                          M 
+002F   2869               M         goto    L00001
+                          M         L?CALL  dojump
+                          M         RST?RP
+                          M     if ((PREV_BANK & 1) != 0)
+                          M         bcf     STATUS, RP0
+                          M     endif
+                          M     if ((PREV_BANK & 2) != 0)
+                          M         bcf     STATUS, RP1
+                          M     endif
+  00000000                M PREV_BANK = 0
+                          M 
+                          M     if ((_11dojump) < 1)
+                          M       if (CODE_SIZE >= 4)
+                          M         if (((_11dojump) & 800h) == 0)
+                          M         bcf     PCLATH, 3
+                          M         else
+                          M         bsf     PCLATH, 3
+                          M         endif
+                          M       endif
+                          M       if (CODE_SIZE == 8)
+                          M         if (((_11dojump) & 1000h) == 0)
+                          M         bcf     PCLATH, 4
+                          M         else
+                          M         bsf     PCLATH, 4
+                          M         endif
+                          M       endif
+                          M     else
+                          M       if ((_11dojump) > $)
+                          M         if (CODE_SIZE >= 4)
+                          M           if (((_11dojump) & 800h) == 0)
+                          M         bcf     PCLATH, 3
+                          M           else
+                          M         bsf     PCLATH, 3
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M           endif
+                          M         endif
+                          M         if (CODE_SIZE == 8)
+                          M           if (((_11dojump) & 1000h) == 0)
+                          M         bcf     PCLATH, 4
+                          M           else
+                          M         bsf     PCLATH, 4
+                          M           endif
+                          M         endif
+                          M       else
+                          M         if (CODE_SIZE >= 4)
+                          M           if (((_11dojump) & 1800h) == 0)
+                          M         clrf    PCLATH
+                          M           else
+                          M             if (((_11dojump) & 800h) == 0)
+                          M         bcf     PCLATH, 3
+                          M             else
+                          M         bsf     PCLATH, 3
+                          M             endif
+                          M             if (CODE_SIZE == 8)
+                          M               if (((_11dojump) & 1000h) == 0)
+                          M         bcf     PCLATH, 4
+                          M               else
+                          M         bsf     PCLATH, 4
+                          M               endif
+                          M             endif
+                          M           endif
+                          M         endif
+                          M       endif
+                          M     endif
+                          M 
+0030   2033               M         call    _11dojump
+                          M         MOVE?AB _LETRA
+                          M         CHK?RP  _LETRA
+                          M     if (((_LETRA) & 180h) == 0)
+                          M       if (PREV_BANK == 1)
+                          M         bcf     STATUS, RP0
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP0
+                          M         bcf     STATUS, RP1
+                          M       endif
+  00000000                M PREV_BANK = 0
+                          M     endif
+                          M 
+                          M     if (((_LETRA) & 180h) == 80h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP0
+                          M       endif
+                          M       if (PREV_BANK == 2)
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M         bsf     STATUS, RP0
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M PREV_BANK = 1
+                          M     endif
+                          M 
+                          M     if (((_LETRA) & 180h) == 100h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 1)
+                          M         bcf     STATUS, RP0
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP0
+                          M       endif
+                          M PREV_BANK = 2
+                          M     endif
+                          M 
+                          M     if (((_LETRA) & 180h) == 180h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP0
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 1)
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bsf     STATUS, RP0
+                          M       endif
+                          M PREV_BANK = 3
+                          M     endif
+0031   00B9               M         movwf   _LETRA
+                          M         L?GOTO  L00001
+                          M     if ($ == (L00001))
+                          M         CLRWDT?
+                          M     endif
+                          M 
+                          M         RST?RP
+                          M     if ((PREV_BANK & 1) != 0)
+                          M         bcf     STATUS, RP0
+                          M     endif
+                          M     if ((PREV_BANK & 2) != 0)
+                          M         bcf     STATUS, RP1
+                          M     endif
+  00000000                M PREV_BANK = 0
+                          M 
+                          M     if ((L00001) < 1)
+                          M       if (CODE_SIZE >= 4)
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M         if (((L00001) & 800h) == 0)
+                          M         bcf     PCLATH, 3
+                          M         else
+                          M         bsf     PCLATH, 3
+                          M         endif
+                          M       endif
+                          M       if (CODE_SIZE == 8)
+                          M         if (((L00001) & 1000h) == 0)
+                          M         bcf     PCLATH, 4
+                          M         else
+                          M         bsf     PCLATH, 4
+                          M         endif
+                          M       endif
+                          M     else
+                          M       if ((L00001) > $)
+                          M         if (CODE_SIZE >= 4)
+                          M           if (((L00001) & 800h) == 0)
+                          M         bcf     PCLATH, 3
+                          M           else
+                          M         bsf     PCLATH, 3
+                          M           endif
+                          M         endif
+                          M         if (CODE_SIZE == 8)
+                          M           if (((L00001) & 1000h) == 0)
+                          M         bcf     PCLATH, 4
+                          M           else
+                          M         bsf     PCLATH, 4
+                          M           endif
+                          M         endif
+                          M       else
+                          M         if (CODE_SIZE >= 4)
+                          M           if (((L00001) & 1800h) == 0)
+                          M         clrf    PCLATH
+                          M           else
+                          M             if (((L00001) & 800h) == 0)
+                          M         bcf     PCLATH, 3
+                          M             else
+                          M         bsf     PCLATH, 3
+                          M             endif
+                          M             if (CODE_SIZE == 8)
+                          M               if (((L00001) & 1000h) == 0)
+                          M         bcf     PCLATH, 4
+                          M               else
+                          M         bsf     PCLATH, 4
+                          M               endif
+                          M             endif
+                          M           endif
+                          M         endif
+                          M       endif
+                          M     endif
+                          M 
+0032   2869               M         goto    L00001
+0033   3000               M dojump  movlw   high (valtbl)
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE 13
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0034   008A               M         movwf   PCLATH
+                          M         MOVE?BA _CONTADOR
+                          M         CHK?RP  _CONTADOR
+                          M     if (((_CONTADOR) & 180h) == 0)
+                          M       if (PREV_BANK == 1)
+                          M         bcf     STATUS, RP0
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP0
+                          M         bcf     STATUS, RP1
+                          M       endif
+  00000000                M PREV_BANK = 0
+                          M     endif
+                          M 
+                          M     if (((_CONTADOR) & 180h) == 80h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP0
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bsf     STATUS, RP0
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M PREV_BANK = 1
+                          M     endif
+                          M 
+                          M     if (((_CONTADOR) & 180h) == 100h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 1)
+                          M         bcf     STATUS, RP0
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP0
+                          M       endif
+                          M PREV_BANK = 2
+                          M     endif
+                          M 
+                          M     if (((_CONTADOR) & 180h) == 180h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP0
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 1)
+                          M         bsf     STATUS, RP1
+                          M       endif
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE 14
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M       if (PREV_BANK == 2)
+                          M         bsf     STATUS, RP0
+                          M       endif
+                          M PREV_BANK = 3
+                          M     endif
+0035   0838               M         movf    _CONTADOR, W
+                          M         RST?RP
+                          M     if ((PREV_BANK & 1) != 0)
+                          M         bcf     STATUS, RP0
+                          M     endif
+                          M     if ((PREV_BANK & 2) != 0)
+                          M         bcf     STATUS, RP1
+                          M     endif
+  00000000                M PREV_BANK = 0
+                          M         TABLE?C 032h
+  0000                    M     local label
+                          M     if ($ >> 8) != (($ + (032h))  >> 8)
+                          M         goto    label
+                          M         ORG     (($ + 0ffh) & 0ff00h)
+                          M label
+                          M     endif
+0036   0782               M         addwf   PCL, F
+0037                      M valtbl
+                      00091         LURET?C 073h
+0037   3473               M         retlw   073h
+                      00092         LURET?C 077h
+0038   3477               M         retlw   077h
+                      00093         LURET?C 032h
+0039   3432               M         retlw   032h
+                      00094         LURET?C 077h
+003A   3477               M         retlw   077h
+                      00095         LURET?C 000h
+003B   3400               M         retlw   000h
+                      00096         LURET?C 038h
+003C   3438               M         retlw   038h
+                      00097         LURET?C 03Fh
+003D   343F               M         retlw   03Fh
+                      00098         LURET?C 06Dh
+003E   346D               M         retlw   06Dh
+                      00099         LURET?C 000h
+003F   3400               M         retlw   000h
+                      00100         LURET?C 067h
+0040   3467               M         retlw   067h
+                      00101         LURET?C 03Eh
+0041   343E               M         retlw   03Eh
+                      00102         LURET?C 079h
+0042   3479               M         retlw   079h
+                      00103         LURET?C 000h
+0043   3400               M         retlw   000h
+                      00104         LURET?C 039h
+0044   3439               M         retlw   039h
+                      00105         LURET?C 032h
+0045   3432               M         retlw   032h
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE 15
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00106         LURET?C 079h
+0046   3479               M         retlw   079h
+                      00107         LURET?C 006h
+0047   3406               M         retlw   006h
+                      00108         LURET?C 077h
+0048   3477               M         retlw   077h
+                      00109         LURET?C 054h
+0049   3454               M         retlw   054h
+                      00110         LURET?C 000h
+004A   3400               M         retlw   000h
+                      00111         LURET?C 067h
+004B   3467               M         retlw   067h
+                      00112         LURET?C 03Eh
+004C   343E               M         retlw   03Eh
+                      00113         LURET?C 079h
+004D   3479               M         retlw   079h
+                      00114         LURET?C 000h
+004E   3400               M         retlw   000h
+                      00115         LURET?C 054h
+004F   3454               M         retlw   054h
+                      00116         LURET?C 03Fh
+0050   343F               M         retlw   03Fh
+                      00117         LURET?C 000h
+0051   3400               M         retlw   000h
+                      00118         LURET?C 073h
+0052   3473               M         retlw   073h
+                      00119         LURET?C 03Fh
+0053   343F               M         retlw   03Fh
+                      00120         LURET?C 05Eh
+0054   345E               M         retlw   05Eh
+                      00121         LURET?C 006h
+0055   3406               M         retlw   006h
+                      00122         LURET?C 077h
+0056   3477               M         retlw   077h
+                      00123         LURET?C 000h
+0057   3400               M         retlw   000h
+                      00124         LURET?C 076h
+0058   3476               M         retlw   076h
+                      00125         LURET?C 077h
+0059   3477               M         retlw   077h
+                      00126         LURET?C 039h
+005A   3439               M         retlw   039h
+                      00127         LURET?C 079h
+005B   3479               M         retlw   079h
+                      00128         LURET?C 032h
+005C   3432               M         retlw   032h
+                      00129         LURET?C 000h
+005D   3400               M         retlw   000h
+                      00130         LURET?C 079h
+005E   3479               M         retlw   079h
+                      00131         LURET?C 06Dh
+005F   346D               M         retlw   06Dh
+                      00132         LURET?C 007h
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE 16
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0060   3407               M         retlw   007h
+                      00133         LURET?C 03Fh
+0061   343F               M         retlw   03Fh
+                      00134         LURET?C 000h
+0062   3400               M         retlw   000h
+                      00135         LURET?C 007h
+0063   3407               M         retlw   007h
+                      00136         LURET?C 079h
+0064   3479               M         retlw   079h
+                      00137         LURET?C 054h
+0065   3454               M         retlw   054h
+                      00138         LURET?C 07Dh
+0066   347D               M         retlw   07Dh
+                      00139         LURET?C 077h
+0067   3477               M         retlw   077h
+                      00140         LURET?C 054h
+0068   3454               M         retlw   054h
+                      00141 
+                      00142         LABEL?L L00001  
+                          M         RST?RP
+                          M     if ((PREV_BANK & 1) != 0)
+                          M         bcf     STATUS, RP0
+                          M     endif
+                          M     if ((PREV_BANK & 2) != 0)
+                          M         bcf     STATUS, RP1
+                          M     endif
+  00000000                M PREV_BANK = 0
+                          M     ifdef PM_USED
+                          M         LALL
+                          M L00001
+                          M         XALL
+                          M     else
+0069                      M L00001
+                          M     endif
+                      00143 
+                      00144 ; C:\USERS\GARFIASLOPEZWINDOWS\DESKTOP\JOSEGL_1P\EL ARA\UNTITLED.PBP    00022   PORTB=LETRA
+                      00145         MOVE?BB _LETRA, PORTB
+                          M         CHK?RP  _LETRA
+                          M     if (((_LETRA) & 180h) == 0)
+                          M       if (PREV_BANK == 1)
+                          M         bcf     STATUS, RP0
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP0
+                          M         bcf     STATUS, RP1
+                          M       endif
+  00000000                M PREV_BANK = 0
+                          M     endif
+                          M 
+                          M     if (((_LETRA) & 180h) == 80h)
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE 17
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP0
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bsf     STATUS, RP0
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M PREV_BANK = 1
+                          M     endif
+                          M 
+                          M     if (((_LETRA) & 180h) == 100h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 1)
+                          M         bcf     STATUS, RP0
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP0
+                          M       endif
+                          M PREV_BANK = 2
+                          M     endif
+                          M 
+                          M     if (((_LETRA) & 180h) == 180h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP0
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 1)
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bsf     STATUS, RP0
+                          M       endif
+                          M PREV_BANK = 3
+                          M     endif
+0069   0839               M         movf    _LETRA, W
+                          M         CHK?RP  PORTB
+                          M     if (((PORTB) & 180h) == 0)
+                          M       if (PREV_BANK == 1)
+                          M         bcf     STATUS, RP0
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP0
+                          M         bcf     STATUS, RP1
+                          M       endif
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE 18
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+  00000000                M PREV_BANK = 0
+                          M     endif
+                          M 
+                          M     if (((PORTB) & 180h) == 80h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP0
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bsf     STATUS, RP0
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M PREV_BANK = 1
+                          M     endif
+                          M 
+                          M     if (((PORTB) & 180h) == 100h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 1)
+                          M         bcf     STATUS, RP0
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP0
+                          M       endif
+                          M PREV_BANK = 2
+                          M     endif
+                          M 
+                          M     if (((PORTB) & 180h) == 180h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP0
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 1)
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bsf     STATUS, RP0
+                          M       endif
+                          M PREV_BANK = 3
+                          M     endif
+006A   0086               M         movwf   PORTB
+                      00146 
+                      00147 ; C:\USERS\GARFIASLOPEZWINDOWS\DESKTOP\JOSEGL_1P\EL ARA\UNTITLED.PBP    00023   CONTADOR = CONTADOR+1
+                      00148         ADD?BCB _CONTADOR, 001h, _CONTADOR
+                          M     if ((_CONTADOR) == (_CONTADOR))
+                          M       if ((001h) == 1)
+                          M         CHK?RP  _CONTADOR
+                          M     if (((_CONTADOR) & 180h) == 0)
+                          M       if (PREV_BANK == 1)
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE 19
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M         bcf     STATUS, RP0
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP0
+                          M         bcf     STATUS, RP1
+                          M       endif
+  00000000                M PREV_BANK = 0
+                          M     endif
+                          M 
+                          M     if (((_CONTADOR) & 180h) == 80h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP0
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bsf     STATUS, RP0
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M PREV_BANK = 1
+                          M     endif
+                          M 
+                          M     if (((_CONTADOR) & 180h) == 100h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 1)
+                          M         bcf     STATUS, RP0
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP0
+                          M       endif
+                          M PREV_BANK = 2
+                          M     endif
+                          M 
+                          M     if (((_CONTADOR) & 180h) == 180h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP0
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 1)
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bsf     STATUS, RP0
+                          M       endif
+                          M PREV_BANK = 3
+                          M     endif
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE 20
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+006B   0AB8               M         incf    _CONTADOR, F
+                          M       else
+                          M         movlw   001h
+                          M         CHK?RP  _CONTADOR
+                          M         addwf   _CONTADOR, F
+                          M       endif
+                          M     else
+                          M       if ((001h) == 1)
+                          M         CHK?RP  _CONTADOR
+                          M         incf    _CONTADOR, W
+                          M         MOVE?AB _CONTADOR
+                          M       else
+                          M         movlw   001h
+                          M         CHK?RP  _CONTADOR
+                          M         addwf   _CONTADOR, W
+                          M         MOVE?AB _CONTADOR
+                          M       endif
+                          M     endif
+                      00149 
+                      00150 ; C:\USERS\GARFIASLOPEZWINDOWS\DESKTOP\JOSEGL_1P\EL ARA\UNTITLED.PBP    00024   PAUSE 500
+                      00151         PAUSE?C 001F4h
+                          M     if (((001F4h) >> 8) == 0)
+                          M         MOVE?CA 001F4h
+                          M         L?CALL  PAUSE
+                          M     else
+                          M         MOVE?CB (001F4h) >> 8, R1 + 1
+                          M         CHK?RP  R1 + 1
+                          M     if (((R1 + 1) & 180h) == 0)
+                          M       if (PREV_BANK == 1)
+                          M         bcf     STATUS, RP0
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP0
+                          M         bcf     STATUS, RP1
+                          M       endif
+  00000000                M PREV_BANK = 0
+                          M     endif
+                          M 
+                          M     if (((R1 + 1) & 180h) == 80h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP0
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bsf     STATUS, RP0
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M PREV_BANK = 1
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE 21
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M     endif
+                          M 
+                          M     if (((R1 + 1) & 180h) == 100h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 1)
+                          M         bcf     STATUS, RP0
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP0
+                          M       endif
+                          M PREV_BANK = 2
+                          M     endif
+                          M 
+                          M     if (((R1 + 1) & 180h) == 180h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP0
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 1)
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bsf     STATUS, RP0
+                          M       endif
+                          M PREV_BANK = 3
+                          M     endif
+                          M     if (low ((001F4h) >> 8) == 0)
+                          M         clrf    R1 + 1
+                          M     else
+006C   3001               M         movlw   low ((001F4h) >> 8)
+006D   00A3               M         movwf   R1 + 1
+                          M     endif
+                          M         MOVE?CA low (001F4h)
+006E   30F4               M         movlw   low (low (001F4h))
+                          M         L?CALL  PAUSEL
+                          M         RST?RP
+                          M     if ((PREV_BANK & 1) != 0)
+                          M         bcf     STATUS, RP0
+                          M     endif
+                          M     if ((PREV_BANK & 2) != 0)
+                          M         bcf     STATUS, RP1
+                          M     endif
+  00000000                M PREV_BANK = 0
+                          M 
+                          M     if ((PAUSEL) < 1)
+                          M       if (CODE_SIZE >= 4)
+                          M         if (((PAUSEL) & 800h) == 0)
+                          M         bcf     PCLATH, 3
+                          M         else
+                          M         bsf     PCLATH, 3
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE 22
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M         endif
+                          M       endif
+                          M       if (CODE_SIZE == 8)
+                          M         if (((PAUSEL) & 1000h) == 0)
+                          M         bcf     PCLATH, 4
+                          M         else
+                          M         bsf     PCLATH, 4
+                          M         endif
+                          M       endif
+                          M     else
+                          M       if ((PAUSEL) > $)
+                          M         if (CODE_SIZE >= 4)
+                          M           if (((PAUSEL) & 800h) == 0)
+                          M         bcf     PCLATH, 3
+                          M           else
+                          M         bsf     PCLATH, 3
+                          M           endif
+                          M         endif
+                          M         if (CODE_SIZE == 8)
+                          M           if (((PAUSEL) & 1000h) == 0)
+                          M         bcf     PCLATH, 4
+                          M           else
+                          M         bsf     PCLATH, 4
+                          M           endif
+                          M         endif
+                          M       else
+                          M         if (CODE_SIZE >= 4)
+                          M           if (((PAUSEL) & 1800h) == 0)
+                          M         clrf    PCLATH
+                          M           else
+                          M             if (((PAUSEL) & 800h) == 0)
+                          M         bcf     PCLATH, 3
+                          M             else
+                          M         bsf     PCLATH, 3
+                          M             endif
+                          M             if (CODE_SIZE == 8)
+                          M               if (((PAUSEL) & 1000h) == 0)
+                          M         bcf     PCLATH, 4
+                          M               else
+                          M         bsf     PCLATH, 4
+                          M               endif
+                          M             endif
+                          M           endif
+                          M         endif
+                          M       endif
+                          M     endif
+                          M 
+006F   2002               M         call    PAUSEL
+                          M     endif
+                      00152 
+                      00153 ; C:\USERS\GARFIASLOPEZWINDOWS\DESKTOP\JOSEGL_1P\EL ARA\UNTITLED.PBP    00025   IF CONTADOR=50 THEN INIC
+                            IO
+                      00154         CMPEQ?BCL       _CONTADOR, 032h, _INICIO
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE 23
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M     if (((032h) > -100h) & ((032h) < 100h))
+                          M         CLRWDT?
+                          M     ifndef NO_CLRWDT
+0070   0064               M         clrwdt
+                          M     endif
+                          M         MOVE?BA _CONTADOR
+                          M         CHK?RP  _CONTADOR
+                          M     if (((_CONTADOR) & 180h) == 0)
+                          M       if (PREV_BANK == 1)
+                          M         bcf     STATUS, RP0
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP0
+                          M         bcf     STATUS, RP1
+                          M       endif
+  00000000                M PREV_BANK = 0
+                          M     endif
+                          M 
+                          M     if (((_CONTADOR) & 180h) == 80h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP0
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bsf     STATUS, RP0
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP1
+                          M       endif
+                          M PREV_BANK = 1
+                          M     endif
+                          M 
+                          M     if (((_CONTADOR) & 180h) == 100h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 1)
+                          M         bcf     STATUS, RP0
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 3)
+                          M         bcf     STATUS, RP0
+                          M       endif
+                          M PREV_BANK = 2
+                          M     endif
+                          M 
+                          M     if (((_CONTADOR) & 180h) == 180h)
+                          M       if (PREV_BANK == 0)
+                          M         bsf     STATUS, RP0
+                          M         bsf     STATUS, RP1
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE 24
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M       endif
+                          M       if (PREV_BANK == 1)
+                          M         bsf     STATUS, RP1
+                          M       endif
+                          M       if (PREV_BANK == 2)
+                          M         bsf     STATUS, RP0
+                          M       endif
+                          M PREV_BANK = 3
+                          M     endif
+0071   0838               M         movf    _CONTADOR, W
+0072   3C32               M         sublw   032h
+                          M         BIT?GOTO 1, STATUS, Z, _INICIO
+                          M     if ($ == (_INICIO))
+                          M         CLRWDT?
+                          M     endif
+                          M 
+                          M     if (CODE_SIZE >= 4)
+                          M       if (((_INICIO) & 800h) == 0)
+                          M         bcf     PCLATH, 3
+                          M       else
+                          M         bsf     PCLATH, 3
+                          M       endif
+                          M     endif
+                          M     if (CODE_SIZE == 8)
+                          M       if (((_INICIO) & 1000h) == 0)
+                          M         bcf     PCLATH, 4
+                          M       else
+                          M         bsf     PCLATH, 4
+                          M       endif
+                          M     endif
+                          M 
+                          M     if (((STATUS) & 0ff80h) != 0)
+                          M         CHK?RP  STATUS
+                          M         bcf     STATUS, DC
+                          M       if ((1)      == 0)
+                          M         btfss   STATUS, Z
+                          M       else
+                          M         btfsc   STATUS, Z
+                          M       endif
+                          M         bsf     STATUS, DC
+                          M         RST?RP
+                          M         btfsc   STATUS, DC
+                          M     else
+                          M         RST?RP
+                          M     if ((PREV_BANK & 1) != 0)
+                          M         bcf     STATUS, RP0
+                          M     endif
+                          M     if ((PREV_BANK & 2) != 0)
+                          M         bcf     STATUS, RP1
+                          M     endif
+  00000000                M PREV_BANK = 0
+                          M       if ((1)      == 0)
+                          M         btfss   STATUS, Z
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE 25
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M       else
+0073   1903               M         btfsc   STATUS, Z
+                          M       endif
+                          M     endif
+                          M 
+0074   282B               M         goto    _INICIO
+                          M     endif
+                      00155 
+                      00156 ; C:\USERS\GARFIASLOPEZWINDOWS\DESKTOP\JOSEGL_1P\EL ARA\UNTITLED.PBP    00026   GOTO PROGRAMA
+                      00157         GOTO?L  _PROGRAMA
+                          M         L?GOTO  _PROGRAMA
+                          M     if ($ == (_PROGRAMA))
+                          M         CLRWDT?
+                          M     endif
+                          M 
+                          M         RST?RP
+                          M     if ((PREV_BANK & 1) != 0)
+                          M         bcf     STATUS, RP0
+                          M     endif
+                          M     if ((PREV_BANK & 2) != 0)
+                          M         bcf     STATUS, RP1
+                          M     endif
+  00000000                M PREV_BANK = 0
+                          M 
+                          M     if ((_PROGRAMA) < 1)
+                          M       if (CODE_SIZE >= 4)
+                          M         if (((_PROGRAMA) & 800h) == 0)
+                          M         bcf     PCLATH, 3
+                          M         else
+                          M         bsf     PCLATH, 3
+                          M         endif
+                          M       endif
+                          M       if (CODE_SIZE == 8)
+                          M         if (((_PROGRAMA) & 1000h) == 0)
+                          M         bcf     PCLATH, 4
+                          M         else
+                          M         bsf     PCLATH, 4
+                          M         endif
+                          M       endif
+                          M     else
+                          M       if ((_PROGRAMA) > $)
+                          M         if (CODE_SIZE >= 4)
+                          M           if (((_PROGRAMA) & 800h) == 0)
+                          M         bcf     PCLATH, 3
+                          M           else
+                          M         bsf     PCLATH, 3
+                          M           endif
+                          M         endif
+                          M         if (CODE_SIZE == 8)
+                          M           if (((_PROGRAMA) & 1000h) == 0)
+                          M         bcf     PCLATH, 4
+                          M           else
+                          M         bsf     PCLATH, 4
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE 26
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M           endif
+                          M         endif
+                          M       else
+                          M         if (CODE_SIZE >= 4)
+                          M           if (((_PROGRAMA) & 1800h) == 0)
+                          M         clrf    PCLATH
+                          M           else
+                          M             if (((_PROGRAMA) & 800h) == 0)
+                          M         bcf     PCLATH, 3
+                          M             else
+                          M         bsf     PCLATH, 3
+                          M             endif
+                          M             if (CODE_SIZE == 8)
+                          M               if (((_PROGRAMA) & 1000h) == 0)
+                          M         bcf     PCLATH, 4
+                          M               else
+                          M         bsf     PCLATH, 4
+                          M               endif
+                          M             endif
+                          M           endif
+                          M         endif
+                          M       endif
+                          M     endif
+                          M 
+0075   282C               M         goto    _PROGRAMA
+                      00158 
+                      00159 ; C:\USERS\GARFIASLOPEZWINDOWS\DESKTOP\JOSEGL_1P\EL ARA\UNTITLED.PBP    00028   END
+                      00160         END?    
+  0000                    M     local loop
+0076   0063               M loop    sleep
+                          M         L?GOTO  loop
+                          M     if ($ == (_98loop))
+                          M         CLRWDT?
+                          M     endif
+                          M 
+                          M         RST?RP
+                          M     if ((PREV_BANK & 1) != 0)
+                          M         bcf     STATUS, RP0
+                          M     endif
+                          M     if ((PREV_BANK & 2) != 0)
+                          M         bcf     STATUS, RP1
+                          M     endif
+  00000000                M PREV_BANK = 0
+                          M 
+                          M     if ((_98loop) < 1)
+                          M       if (CODE_SIZE >= 4)
+                          M         if (((_98loop) & 800h) == 0)
+                          M         bcf     PCLATH, 3
+                          M         else
+                          M         bsf     PCLATH, 3
+                          M         endif
+                          M       endif
+                          M       if (CODE_SIZE == 8)
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE 27
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M         if (((_98loop) & 1000h) == 0)
+                          M         bcf     PCLATH, 4
+                          M         else
+                          M         bsf     PCLATH, 4
+                          M         endif
+                          M       endif
+                          M     else
+                          M       if ((_98loop) > $)
+                          M         if (CODE_SIZE >= 4)
+                          M           if (((_98loop) & 800h) == 0)
+                          M         bcf     PCLATH, 3
+                          M           else
+                          M         bsf     PCLATH, 3
+                          M           endif
+                          M         endif
+                          M         if (CODE_SIZE == 8)
+                          M           if (((_98loop) & 1000h) == 0)
+                          M         bcf     PCLATH, 4
+                          M           else
+                          M         bsf     PCLATH, 4
+                          M           endif
+                          M         endif
+                          M       else
+                          M         if (CODE_SIZE >= 4)
+                          M           if (((_98loop) & 1800h) == 0)
+                          M         clrf    PCLATH
+                          M           else
+                          M             if (((_98loop) & 800h) == 0)
+                          M         bcf     PCLATH, 3
+                          M             else
+                          M         bsf     PCLATH, 3
+                          M             endif
+                          M             if (CODE_SIZE == 8)
+                          M               if (((_98loop) & 1000h) == 0)
+                          M         bcf     PCLATH, 4
+                          M               else
+                          M         bsf     PCLATH, 4
+                          M               endif
+                          M             endif
+                          M           endif
+                          M         endif
+                          M       endif
+                          M     endif
+                          M 
+0077   2876               M         goto    _98loop
+                      00161 
+                      00162         END
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE 28
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ADC_BITS                          00000008
+ADC_CLOCK                         00000003
+ADC_SAMPLEUS                      00000032
+ADD?BCB                           
+ADEN                              00000003
+BANK0_END                         0000007F
+BANK0_START                       00000020
+BANK1_END                         000000EF
+BANK1_START                       000000A0
+BANK2_END                         0000014F
+BANK2_START                       00000120
+BIT?FLIP                          
+BIT?FW                            
+BIT?GOTO                          
+BIT?R1                            
+BIT?R2                            
+BIT?W                             
+BRGH                              00000002
+BUTTON_PAUSE                      0000000A
+C                                 00000000
+C1INV                             00000004
+C1OUT                             00000006
+C2INV                             00000005
+C2OUT                             00000007
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCP1_BIT                          00000003
+CCP1_REG                          00000006
+CCPR1H                            00000016
+CCPR1L                            00000015
+CHK?RP                            
+CIS                               00000003
+CLRWDT?                           
+CLRWDT?NOP                        
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             0000001F
+CMIE                              00000006
+CMIF                              00000006
+CMPEQ?BCL                         
+CODE_SIZE                         00000002
+CREN                              00000004
+CSRC                              00000007
+DC                                00000001
+DEBUGIN_BIT                       00000000
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE 29
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+DEBUGIN_MODE                      00000001
+DEBUGIN_REG                       00000006
+DEBUG_BAUD                        00000960
+DEBUG_BIT                         00000000
+DEBUG_DELAY                       00000193
+DEBUG_MODE                        00000001
+DEBUG_REG                         00000006
+DONE                              00000023
+DONERET                           00000027
+DONE_USED                         00000001
+EEADR                             0000009B
+EECON1                            0000009C
+EECON2                            0000009D
+EEDATA                            0000009A
+EEIE                              00000007
+EEIF                              00000007
+EEPROM_END                        0000217F
+EEPROM_START                      00002100
+END?                              
+F                                 00000001
+FERR                              00000002
+FLAGS                             00000032
+FSR                               00000004
+GIE                               00000007
+GOP                               00000033
+GOTO?L                            
+HSER_BAUD                         00000960
+HSER_BITS                         00000008
+HSER_RCSTA                        00000090
+HSER_SPBRG                        00000019
+HSER_TXSTA                        00000020
+I2CFIRSTFLAG                      FLAGS, 2
+I2CREADFLAG                       FLAGS, 3
+I2CSTOPFLAG                       FLAGS, 5
+I2CSTOPSTRFLAG                    FLAGS, 6
+I2CWRITEFLAG                      FLAGS, 4
+INDF                              00000000
+INIT                              00000028
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+L00001                            00000069
+L?CALL                            
+L?GOTO                            
+LABEL?L                           
+LCDCDFLAG                         FLAGS, 0
+LCDINITFLAG                       FLAGS, 1
+LCD_BITS                          00000004
+LCD_COMMANDUS                     000005DC
+LCD_DATAUS                        0000002C
+LCD_DBIT                          00000000
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE 30
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+LCD_DREG                          00000005
+LCD_EBIT                          00000003
+LCD_EREG                          00000006
+LCD_LINES                         00000002
+LCD_RSBIT                         00000004
+LCD_RSREG                         00000005
+LCD_RWBIT                         00000004
+LCD_RWREG                         00000005
+LOOKUP?BCLB                       
+LURET?C                           
+MOVE?AB                           
+MOVE?AT                           
+MOVE?AW                           
+MOVE?AWW                          
+MOVE?BA                           
+MOVE?BB                           
+MOVE?BT                           
+MOVE?BW                           
+MOVE?CA                           
+MOVE?CB                           
+MOVE?CT                           
+MOVE?CW                           
+MOVE?TA                           
+MOVE?TB                           
+MOVE?TT                           
+MOVE?TW                           
+MOVE?WA                           
+MOVE?WB                           
+MOVE?WT                           
+MOVE?WW                           
+MOVE?WWA                          
+NOT_BO                            00000000
+NOT_BOD                           00000000
+NOT_BOR                           00000000
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+OERR                              00000001
+OPTION_REG                        00000081
+OSC                               00000004
+OSCF                              00000003
+OSC_VALID                         00000001
+PAUSE                             00000001
+PAUSE?C                           
+PAUSEL                            00000002
+PAUSEUS                           0000000E
+PAUSEUSL                          0000000F
+PAUSEUS_USED                      00000001
+PAUSE_DELAY                       000003DF
+PAUSE_USED                        00000001
+PCL                               00000002
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE 31
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PIE1                              0000008C
+PIR1                              0000000C
+PORTA                             00000005
+PORTB                             00000006
+PR2                               00000092
+PREV_BANK                         00000000
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+R0                                00000020
+R1                                00000022
+R2                                00000024
+R3                                00000026
+R4                                00000028
+R5                                0000002A
+R6                                0000002C
+R7                                0000002E
+R8                                00000030
+RAM_BANKS                         00000003
+RAM_END                           0000014F
+RAM_START                         00000020
+RBIE                              00000003
+RBIF                              00000000
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+RM1                               00000034
+RM2                               00000035
+RP0                               00000005
+RP1                               00000006
+RR1                               00000036
+RR2                               00000037
+RST?RP                            
+RX9                               00000006
+RX9D                              00000000
+SPBRG                             00000099
+SPEN                              00000007
+SREN                              00000005
+STATUS                            00000003
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE 32
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+T1OSCEN                           00000003
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+TABLE?C                           
+TMR0                              00000001
+TMR1CS                            00000001
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISB                             00000086
+TRMT                              00000001
+TX9                               00000006
+TX9D                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             0000009F
+VREN                              00000007
+VROE                              00000006
+VRR                               00000005
+W                                 00000000
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_CONTADOR                         00000038
+_CP_50                            00002BFF
+_CP_75                            000017FF
+_CP_ALL                           000003FF
+_CP_OFF                           00003FFF
+_DATA_CP_OFF                      00003FFF
+_DATA_CP_ON                       00003EFF
+_ER_OSC_CLKOUT                    00003FFF
+MPASM  5.03                      UNTITLED.ASM   10-26-2012  10:06:25         PAGE 33
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_ER_OSC_NOCLKOUT                  00003FFE
+_EXTCLK_OSC                       00003FEF
+_HS_OSC                           00003FEE
+_INICIO                           0000002B
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LETRA                            00000039
+_LP_OSC                           00003FEC
+_LVP_OFF                          00003F7F
+_LVP_ON                           00003FFF
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PORTH                            00000005
+_PORTL                            00000006
+_PROGRAMA                         0000002C
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_TRISH                            00000085
+_TRISL                            00000086
+_USED                             00000001
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FED
+__16F628                          00000001
+main                              00000028
+pauseloop                         00000003
+pauseusdone                       00000022
+pauseush                          00000018
+pauseusloop                       00000015
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXX--------
+2000 : -------X-------- ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:   120
+Program Memory Words Free:  1928
+
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     0 reported,     1 suppressed
+
+Error[173]  : Source file path exceeds 62 characters (C:\USERS\GARFIASLOPEZWINDOWS\DESKTOP\JOSEGL_1P\EL ARA\UNTITLED.MAC)

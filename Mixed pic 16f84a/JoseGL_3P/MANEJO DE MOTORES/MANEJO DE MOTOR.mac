@@ -1,0 +1,103 @@
+
+	NOLIST
+; PICBASIC PRO(TM) Compiler 2.50a, (c) 1998, 2007 microEngineering Labs, Inc. All Rights Reserved.  
+
+LABEL?L macro Label
+        RST?RP
+    ifdef PM_USED
+        LALL
+Label
+        XALL
+    else
+Label
+    endif
+    endm
+
+CMPGT?BCL macro Bin, Cin, Label
+    if ((Cin) < 0)
+        L?GOTO  Label
+    else
+      if ((Cin) < 0ffh)
+        CLRWDT?
+        MOVE?CA (Cin) + 1
+        CHK?RP  Bin
+        subwf   Bin, W
+        BIT?GOTO 1, STATUS, C, Label
+      endif
+    endif
+    endm
+
+END? macro
+    local loop
+loop    sleep
+        L?GOTO  loop
+    endm
+
+GOSUB?L macro Label
+    local dlabel
+    ifdef DEBUG_STACK
+        CHK?RP  DEBUG_STACK
+      ifdef DEBUG_STACK_ADDR
+        bcf     STATUS, C
+        rlf     DEBUG_STACK, W
+        addlw   DEBUG_STACK_ADDR
+        movwf   FSR
+        movlw   low (dlabel)
+        movwf   INDF
+        incf    FSR, F
+        movlw   (dlabel) >> 8
+        movwf   INDF
+      endif
+        incf    DEBUG_STACK, F
+    endif
+        L?CALL  Label
+dlabel
+    endm
+
+GOTO?L macro Label
+        L?GOTO  Label
+    endm
+
+NEXT?BCL macro Bin, Cin, Label
+    if ((Cin) == 1)
+        CHK?RP  Bin
+      if ((PREV_BANK == 0) & (CODE_SIZE <= 2))
+        incfsz  Bin, F
+        goto    Label
+      else
+        incf    Bin, F
+        BIT?GOTO 0, STATUS, Z, Label
+      endif
+    else
+        movlw   Cin
+        CHK?RP  Bin
+        addwf   Bin, F
+      if ((Cin) <= 255)
+        BIT?GOTO 0, STATUS, C, Label
+      endif
+    endif
+    endm
+
+PAUSE?C macro Cin
+    if (((Cin) >> 8) == 0)
+        MOVE?CA Cin
+        L?CALL  PAUSE
+    else
+        MOVE?CB (Cin) >> 8, R1 + 1
+        MOVE?CA low (Cin)
+        L?CALL  PAUSEL
+    endif
+    endm
+PAUSE_USED = 1
+
+RETURN? macro
+    ifdef DEBUG_STACK
+        CHK?RP  DEBUG_STACK
+        decf    DEBUG_STACK, F
+    endif
+        RST?RP
+        return
+    endm
+
+
+	LIST
